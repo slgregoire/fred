@@ -11,6 +11,6 @@ urlpatterns = patterns('',
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('home.urls')),
     url(r'^search/', include('search.urls')),
-    url(r'^graph/', inclulde('graph.urls')),
+    url(r'^graph/', include('graph.urls')),
 
 )
