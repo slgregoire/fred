@@ -12,12 +12,8 @@ def search(request):
 	#send the search request to the FRED's API and return results
 	if request.method == 'POST':
 		search_text = request.POST['query'].strip()
-
+		
 		if search_text:
-			searcher = fred_api.searcher()
-			searcher('query')
-			searcher.shorten_data()
-			result_list = searcher.make_title_list()
-			print result_list
-			
+			result_list = fred_api.fred_searcher(search_text)
+						
 	return render_to_response('search/base.html', {'result_list': result_list}, context)
