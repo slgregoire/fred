@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from django.http import HttpResponse
 
 import fred_graph
 
@@ -9,24 +8,19 @@ import fred_graph
 
 def index(request):
 	context = RequestContext(request)
-	canvas = []
+	chart = [1]
 
 	if request.method == 'POST':
 		search_text = request.POST['query'].strip()
 		
 		if search_text:
-			df, series_id = fred_graph.fred_grapher(search_text)
-			
-			#plot this data and save to object to be passed to HttpResponse
-			fig = plt.figure()
-			ax = fig.add_subplot(111)
+			fred_graph.fred_grapher(search_text)
+			'''return HttpResponse("<img src = 'C:/Users/Scott Gregoire/Desktop/fred/static/chart_output.png'> <p>return to <a href = '/graph/'>graph</a></p>")			
+			'''
 
-			df.value.plot(label = series_id)
-			plt.legend(loc = 'best')
+			return render_to_response('graph/chart.html', {'chart': chart}, context)
 
-			canvas = FigureCanvas(fig)
-
-	return render_to_response('graph/base.html', {'chart': canvas}, context)		
+	return render_to_response('graph/base.html', {'chart': chart}, context)		
 
 
 

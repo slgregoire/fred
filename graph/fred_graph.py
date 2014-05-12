@@ -1,9 +1,7 @@
-
-			
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 def fred_grapher(search_text):
 	url = 'http://api.stlouisfed.org/fred/series/search'
@@ -44,9 +42,14 @@ def fred_grapher(search_text):
 	data.set_index(pd.to_datetime(data['date']), inplace = True)
 	data.drop('date', axis = 1, inplace = True)
 
-	return data, series_id 
+	#plot this data and save to object as a png file to be returned
+	fig = plt.figure()
+	ax = fig.add_subplot(111)
 
-		
+	data.value.plot(label = series_id)
+	plt.legend(loc = 'best')
 
-		
+	plt.savefig('C:/Users/Scott Gregoire/Desktop/fred/static/chart_output.png')
+
+
 		
