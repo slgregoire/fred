@@ -6,4 +6,4 @@ def index(request):
 	context = RequestContext(request)
 	context_dict = {}
 
-	return render_to_response('home/base.html', context_dict, context)
+	return render_to_response('home/home.html', context_dict, context)

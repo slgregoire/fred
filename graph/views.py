@@ -8,19 +8,17 @@ import fred_graph
 
 def index(request):
 	context = RequestContext(request)
-	chart = [1]
+	chart = 0
 
 	if request.method == 'POST':
 		search_text = request.POST['query'].strip()
 		
+		chart = 1
+
 		if search_text:
 			fred_graph.fred_grapher(search_text)
-			'''return HttpResponse("<img src = 'C:/Users/Scott Gregoire/Desktop/fred/static/chart_output.png'> <p>return to <a href = '/graph/'>graph</a></p>")			
-			'''
 
-			return render_to_response('graph/chart.html', {'chart': chart}, context)
-
-	return render_to_response('graph/base.html', {'chart': chart}, context)		
+	return render_to_response('graph/chart.html', {'chart': chart}, context)		
 
 
 

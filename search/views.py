@@ -16,4 +16,4 @@ def search(request):
 		if search_text:
 			result_list = fred_api.fred_searcher(search_text)
 						
-	return render_to_response('search/base.html', {'result_list': result_list}, context)
+	return render_to_response('search/search.html', {'result_list': result_list}, context)
