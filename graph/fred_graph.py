@@ -49,7 +49,7 @@ def fred_grapher(search_text):
 	data.value.plot(label = series_id)
 	plt.legend(loc = 'best')
 
-	plt.savefig('C:/Users/Scott Gregoire/Desktop/fred/static/chart_output.png')
-
+	plt.savefig('/Users/Scott/Desktop/fred/static/chart_output.png')
+	#C:/Users/Scott Gregoire/Desktop/fred/static/chart_output.png
 
 		

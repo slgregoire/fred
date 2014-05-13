@@ -18,7 +18,7 @@ def index(request):
 		if search_text:
 			fred_graph.fred_grapher(search_text)
 
-	return render_to_response('graph/chart.html', {'chart': chart}, context)		
+	return render_to_response('graph/graph.html', {'chart': chart}, context)		
 
 
 
