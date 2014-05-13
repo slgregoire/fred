@@ -1,3 +1,4 @@
+import os
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -49,7 +50,8 @@ def fred_grapher(search_text):
 	data.value.plot(label = series_id)
 	plt.legend(loc = 'best')
 
-	plt.savefig('/Users/Scott/Desktop/fred/static/chart_output.png')
-	#C:/Users/Scott Gregoire/Desktop/fred/static/chart_output.png
+	static_dir = os.path.dirname(os.path.dirname(__file__))
+
+	plt.savefig(os.path.join(static_dir, 'static/chart_output.png'))
 
 		
