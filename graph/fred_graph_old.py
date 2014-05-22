@@ -1,6 +1,8 @@
+import os
 import requests
 import pandas as pd
-import os 
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 def fred_grapher(search_text):
 	url = 'http://api.stlouisfed.org/fred/series/search'
@@ -35,16 +37,21 @@ def fred_grapher(search_text):
 	#req_df holds the parsed json in a pandas dataframe
 	data = pd.DataFrame(data['observations'])
 		
-	#transforming data and exporting to json
+	#transforming data
 	data.drop(['realtime_start', 'realtime_end'], axis = 1, inplace = True)
-	data_json = data.to_json(orient = 'index')
-	
-	current_parent_dir = os.path.dirname(__file__)
-	static_dir = os.path.dirname(current_parent_dir)
+	data.loc[:,'value'] = data.loc[:, 'value'].astype(float)
+	data.set_index(pd.to_datetime(data['date']), inplace = True)
+	data.drop('date', axis = 1, inplace = True)
 
-	with open(os.path.join(static_dir, 'static/graph_data_json.json'), 'w') as file:
-		file.write(data_json)
-	
-		
+	#plot this data and save to object as a png file to be returned
+	fig = plt.figure()
+	ax = fig.add_subplot(111)
+
+	data.value.plot(label = series_id)
+	plt.legend(loc = 'best')
+
+	static_dir = os.path.dirname(os.path.dirname(__file__))
+
+	plt.savefig(os.path.join(static_dir, 'static/chart_output.png'))
 
 		

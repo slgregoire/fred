@@ -12,7 +12,6 @@ def index(request):
 
 	if request.method == 'POST':
 		search_text = request.POST['query'].strip()
-		
 		chart = 1
 
 		if search_text:
