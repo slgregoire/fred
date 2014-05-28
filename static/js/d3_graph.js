@@ -12,7 +12,7 @@ var yAxis = d3.svg.axis().scale(y).orient('left').ticks(5);
 
 var valueline = d3.svg.line()
 	.x(function(d) { return x(d.date); })
-	.y(function(d) { return y(d.close); });
+	.y(function(d) { return y(d.value); });
 	
 var svg = d3.select('body')
 		.append('svg')
@@ -21,14 +21,14 @@ var svg = d3.select('body')
 		.append('g')
 			.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
-d3.json("{% static 'graph_data_json.json' %}", function(error, data) {
+d3.json("{% static 'graph_data.json' %}", function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.date);
 		d.value = +d.value;
 	})
 	
 	x.domain(d3.extent(data, function(d) { return d.date }));
-	y.domain([0, d3.max(data, function(d) { return d.value})]);
+	y.domain([0, d3.max(data, function(d) { return d.value })]);
 
 	svg.append('path')
 		.attr('d', valueline(data));
@@ -40,6 +40,5 @@ d3.json("{% static 'graph_data_json.json' %}", function(error, data) {
 		
 	svg.append('g')
 		.attr('class', 'y axis')
-		.call(yAxis);
-		
+		.call(yAxis);	
 });
