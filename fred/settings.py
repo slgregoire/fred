@@ -20,11 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'hbvld(uz$xaze5)kw$&$*%wqwo%v)=im^3&p5)@!=@)i8kl4rn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',
+                 'www.breadandcircuits.org',
+		 '127.0.0.1:8001']
 
 
 # Application definition
