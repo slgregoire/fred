@@ -39,13 +39,9 @@ def fred_grapher(search_text):
 	data.drop(['realtime_start', 'realtime_end'], axis = 1, inplace = True)
 	data_json = data.to_json(orient = 'records')
 	
-	static_parent_dir = os.path.dirname(os.path.dirname(__file__))
-	static_dir = os.path.join(static_parent_dir, 'static')
-	
-	with open(os.path.join(static_dir, 'graph_data.json'), 'w') as file:
-		file.write(data_json)
-	
+	return data_json
 
+	
 		
 
 		

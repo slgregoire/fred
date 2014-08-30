@@ -62,9 +62,6 @@
 	{% if chart %} 
 	<div>	
 	<script>
-
-  var data = {{ json_data|safe }} //importing json data directly from python, not saving it locally on linux box
-
 	var margin = {top: 30, right: 20, bottom: 30, left: 50},
 width = 600 - margin.left - margin.right,
 height = 270 - margin.top - margin.bottom;
@@ -89,6 +86,7 @@ var svg = d3.select('body')
 	.append('g')
 		.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
+d3.json("{% static 'graph_data.json' %}", function(error, data) {
 data.forEach(function(d) {
 	d.date = parseDate(d.date);
 	d.value = +d.value;
@@ -108,7 +106,7 @@ svg.append('g')
 svg.append('g')
 	.attr('class', 'y axis')
 	.call(yAxis);	
-
+});
 </script>	
 </div>
 	{% endif %}
